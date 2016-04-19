@@ -316,12 +316,11 @@ Flickity.prototype.dragEndBoostSelect = function() {
 // ----- staticClick ----- //
 
 Flickity.prototype.staticClick = function( event, pointer ) {
-  // get clickedCell, if cell was clicked
-  var clickedCell = this.getParentCell( event.target );
-  var cellElem = clickedCell && clickedCell.element;
-  var cellIndex = clickedCell && utils.indexOf( this.cells, clickedCell );
-
-  if (event && pointer && cellElem && cellIndex) {
+  if (event && event.target && pointer && cellElem && cellIndex) {
+    // get clickedCell, if cell was clicked
+    var clickedCell = this.getParentCell( event.target );
+    var cellElem = clickedCell && clickedCell.element;
+    var cellIndex = clickedCell && utils.indexOf( this.cells, clickedCell );
     this.dispatchEvent( 'staticClick', event, [ pointer, cellElem, cellIndex ] );
   }
 };
