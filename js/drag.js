@@ -316,7 +316,11 @@ Flickity.prototype.dragEndBoostSelect = function() {
 // ----- staticClick ----- //
 
 Flickity.prototype.staticClick = function( event, pointer ) {
-  if (event && event.target && pointer && cellElem && cellIndex) {
+  var shouldDispatch = event &&
+                       event.target &&
+                       (event.target instanceof Element);
+
+  if (shouldDispatch) {
     // get clickedCell, if cell was clicked
     var clickedCell = this.getParentCell( event.target );
     var cellElem = clickedCell && clickedCell.element;

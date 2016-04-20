@@ -539,6 +539,8 @@ Flickity.prototype.getCellElements = function() {
  * @returns {Flickit.Cell} cell
  */
 Flickity.prototype.getParentCell = function( elem ) {
+  if (!(elem instanceof Element)) return;
+
   // first check if elem is cell
   var cell = this.getCell( elem );
   if ( cell ) {

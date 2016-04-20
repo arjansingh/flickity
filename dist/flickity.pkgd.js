@@ -2450,6 +2450,8 @@ Flickity.prototype.getCellElements = function() {
  * @returns {Flickit.Cell} cell
  */
 Flickity.prototype.getParentCell = function( elem ) {
+  if (!(elem instanceof Element)) return;
+
   // first check if elem is cell
   var cell = this.getCell( elem );
   if ( cell ) {
@@ -3673,11 +3675,17 @@ Flickity.prototype.dragEndBoostSelect = function() {
 // ----- staticClick ----- //
 
 Flickity.prototype.staticClick = function( event, pointer ) {
-  // get clickedCell, if cell was clicked
-  var clickedCell = this.getParentCell( event.target );
-  var cellElem = clickedCell && clickedCell.element;
-  var cellIndex = clickedCell && utils.indexOf( this.cells, clickedCell );
-  this.dispatchEvent( 'staticClick', event, [ pointer, cellElem, cellIndex ] );
+  var shouldDispatch = event &&
+                       event.target &&
+                       (event.target instanceof Element);
+
+  if (shouldDispatch) {
+    // get clickedCell, if cell was clicked
+    var clickedCell = this.getParentCell( event.target );
+    var cellElem = clickedCell && clickedCell.element;
+    var cellIndex = clickedCell && utils.indexOf( this.cells, clickedCell );
+    this.dispatchEvent( 'staticClick', event, [ pointer, cellElem, cellIndex ] );
+  }
 };
 
 // -----  ----- //
