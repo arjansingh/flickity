@@ -154,7 +154,7 @@ if ( typeof define === 'function' && define.amd ) {
  * class helper functions
  * from bonzo https://github.com/ded/bonzo
  * MIT license
- * 
+ *
  * classie.has( elem, 'my-class' ) -> true/false
  * classie.add( elem, 'my-new-class' )
  * classie.remove( elem, 'my-unwanted-class' )
@@ -1346,7 +1346,7 @@ utils.modulo = function( num, div ) {
 };
 
 // ----- isArray ----- //
-  
+
 var objToString = Object.prototype.toString;
 utils.isArray = function( obj ) {
   return objToString.call( obj ) == '[object Array]';
@@ -5389,6 +5389,7 @@ Flickity.prototype.imagesLoaded = function() {
   }
   var _this = this;
   function onImagesLoadedProgress( instance, image ) {
+    if (!image || !image.img) return;
     var cell = _this.getParentCell( image.img );
     _this.cellSizeChange( cell && cell.element );
     if ( !_this.options.freeScroll ) {
@@ -5401,4 +5402,3 @@ Flickity.prototype.imagesLoaded = function() {
 return Flickity;
 
 }));
-
