@@ -1422,7 +1422,7 @@ utils.setText = ( function() {
 // ----- getParent ----- //
 
 utils.getParent = function( elem, selector ) {
-  while ( elem != document.body ) {
+  while ( elem != document.body && elem instanceof Element && elem.parentNode instanceof Element ) {
     elem = elem.parentNode;
     if ( matchesSelector( elem, selector ) ) {
       return elem;
