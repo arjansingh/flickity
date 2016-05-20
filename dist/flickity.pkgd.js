@@ -17,7 +17,7 @@
 
 ( function( window ) {
 
-
+if (typeof window.document === 'undefined') return;
 
 // -------------------------- utils -------------------------- //
 
@@ -154,7 +154,7 @@ if ( typeof define === 'function' && define.amd ) {
  * class helper functions
  * from bonzo https://github.com/ded/bonzo
  * MIT license
- * 
+ *
  * classie.has( elem, 'my-class' ) -> true/false
  * classie.add( elem, 'my-new-class' )
  * classie.remove( elem, 'my-unwanted-class' )
@@ -166,8 +166,6 @@ if ( typeof define === 'function' && define.amd ) {
 
 ( function( window ) {
 
-
-
 // class helper functions from bonzo https://github.com/ded/bonzo
 
 function classReg( className ) {
@@ -177,6 +175,8 @@ function classReg( className ) {
 // classList support for class management
 // altho to be fair, the api sucks because it won't accept multiple classes at once
 var hasClass, addClass, removeClass;
+
+if (!window.document) return;
 
 if ( 'classList' in document.documentElement ) {
   hasClass = function( elem, c ) {
@@ -722,6 +722,7 @@ if ( typeof define === 'function' && define.amd ) {
 ( function( window ) {
 
 
+if (!window.document) return;
 
 var docElem = document.documentElement;
 
@@ -803,7 +804,11 @@ if ( typeof define === 'function' && define.amd ) {
 
 ( function( window ) {
 
-
+var document = typeof window.document !== 'undefined' ? window.document : {
+  documentElement: {
+    style: ''
+  }
+};
 
 var prefixes = 'Webkit Moz ms Ms O'.split(' ');
 var docElemStyle = document.documentElement.style;
@@ -858,6 +863,7 @@ if ( typeof define === 'function' && define.amd ) {
 
 ( function( window, undefined ) {
 
+if (typeof window.document === 'undefined') return;
 
 
 // -------------------------- helpers -------------------------- //
@@ -1110,6 +1116,7 @@ if ( typeof define === 'function' && define.amd ) {
 ( function( window ) {
 
 
+if (typeof window.document === 'undefined') return;
 
 var document = window.document;
 // collection of functions to be triggered on ready
@@ -1191,6 +1198,8 @@ if ( typeof define === 'function' && define.amd ) {
 ( function( ElemProto ) {
 
   'use strict';
+
+  if (!ElemProto) return;
 
   var matchesMethod = ( function() {
     // check for the standard method name first
@@ -1285,7 +1294,7 @@ if ( typeof define === 'function' && define.amd ) {
     window.matchesSelector = matchesSelector;
   }
 
-})( Element.prototype );
+})( typeof Element !== 'undefined' ? Element.prototype : null);
 
 /**
  * Fizzy UI utils v1.0.1
@@ -1346,7 +1355,7 @@ utils.modulo = function( num, div ) {
 };
 
 // ----- isArray ----- //
-  
+
 var objToString = Object.prototype.toString;
 utils.isArray = function( obj ) {
   return objToString.call( obj ) == '[object Array]';
